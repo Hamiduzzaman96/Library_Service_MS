@@ -11,7 +11,7 @@ type bookMySQLRepository struct {
 	db *sql.DB
 }
 
-func newBookmySQLRepository(db *sql.DB) *bookMySQLRepository {
+func NewBookMySQLRepository(db *sql.DB) *bookMySQLRepository {
 	return &bookMySQLRepository{db: db}
 }
 
