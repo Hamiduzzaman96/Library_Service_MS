@@ -2,10 +2,9 @@ syntax = "proto3";
 
 package loanpb;
 
-option go_package = "library-microservice/proto/loanpb;loanpb;"
+option go_package = "proto/loanpb";
 
-import "google/api/annotations.proto"
-//import "google/protobuf/empty.proto" 
+import "google/api/annotations.proto";
 
 service LoanService {
     //create a new loan
