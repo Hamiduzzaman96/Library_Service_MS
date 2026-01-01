@@ -36,9 +36,7 @@ func main() {
 	defer cancel()
 
 	mux := runtime.NewServeMux()
-	err := pb.RegisterBookServiceHandlerFromEndpoint(
-		ctx,
-		mux,
+	err := pb.RegisterBookServiceHandlerFromEndpoint(ctx, mux,
 		"localhost:50051",
 		[]grpc.DialOption{grpc.WithInsecure()},
 	)

@@ -3,24 +3,46 @@ syntax = "proto3";
 package book;
 option go_package = "proto/bookpb";
 
-service BookService {
-    rpc CreateBook( CreateBookRequest) returns (Empty);
-    rpc GetBook (GetBookRequest) returns (GetBookResponse);
-}
 
-message CreateBookRequest{
-    string title = 1;
-    string author = 2;
-}
+import "google/api/annotations.proto";
 
 
-message GetBookRequest{
-    int64 id =1;
+message CreateBookRequest {
+  string title = 1;
+  string author = 2;
+  string isbn = 3;
 }
 
-message GetBookResponse{
-    int64 id = 1;
-    string title = 2;
-    string author = 3;
+message GetBookRequest {
+  int64 id = 1;
 }
+
+message GetBookResponse {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string isbn = 4;
+}
+
+// Empty message (already provided by google.protobuf.Empty)
+import "google/protobuf/empty.proto";
 message Empty {}
+
+
+service BookService {
+
+  // Create a new book
+  rpc CreateBook(CreateBookRequest) returns (Empty) {
+    option (google.api.http) = {
+      post: "/v1/books"
+      body: "*"
+    };
+  }
+
+  // Get a book by ID
+  rpc GetBook(GetBookRequest) returns (GetBookResponse) {
+    option (google.api.http) = {
+      get: "/v1/books/{id}"
+    };
+  }
+}
