@@ -4,33 +4,27 @@ package loanpb;
 
 option go_package = "proto/loanpb";
 
-
-service LoanService {
-    //create a new loan
-    rpc CreateLoan(CreateLoanRequest) returns (CreateLoanResponse)
- // Get loan by ID
-    rpc GetLoan(GetLoanRequest) returns (GetLoanResponse)
-}
+import "google/protobuf/empty.proto";
 
 message CreateLoanRequest {
-    int64 book_id = 1;
-    int64 user_id = 2;
+  int64 book_id = 1;
+  int64 user_id = 2;
 }
 
-message CreateLoanResponse{
-     int64 id = 1;
-    int64 book_id = 2;
-    int64 user_id = 3;
-    string status = 4;
+message GetLoanRequest {
+  int64 id = 1;
 }
 
-message GetLoanRequest{
-    int64 id = 1;
+message GetLoanResponse {
+  int64 id = 1;
+  int64 book_id = 2;
+  int64 user_id = 3;
+  string status = 4;
 }
+message Empty {}
 
-message GetLoanResponse{
-    int64 id = 1;
-    int64 book_id = 2;
-    int64 user_id = 3;
-    string status = 4;
+// Loan Service (internal, no HTTP mapping)
+service LoanService {
+  rpc CreateLoan(CreateLoanRequest) returns (Empty);
+  rpc GetLoan(GetLoanRequest) returns (GetLoanResponse);
 }

@@ -8,28 +8,29 @@ import (
 	"github.com/Hamiduzzaman96/Library_Service_MS/internal/domain"
 	"github.com/Hamiduzzaman96/Library_Service_MS/internal/repository"
 	"github.com/Hamiduzzaman96/Library_Service_MS/pkg/resilience"
+	"github.com/Hamiduzzaman96/Library_Service_MS/proto/bookpb"
 	"github.com/sony/gobreaker"
 )
 
 var ErrBookNotFound = errors.New("Book Not Found")
 
 type LoanUsecase struct {
-	loanRepo repository.LoanRepository
-	bookSvc  domain.BookServiceClient
-	cb       *gobreaker.CircuitBreaker
-	timeout  time.Duration
-	retries  int
-	delay    time.Duration
+	loanRepo   repository.LoanRepository
+	bookClient bookpb.BookServiceClient
+	cb         *gobreaker.CircuitBreaker
+	timeout    time.Duration
+	retries    int
+	delay      time.Duration
 }
 
-func NewLoanUsecase(loanRepo repository.LoanRepository, bookSvc domain.BookServiceClient) *LoanUsecase {
+func NewLoanUsecase(loanRepo repository.LoanRepository, bookClient bookpb.BookServiceClient) *LoanUsecase {
 	return &LoanUsecase{
-		loanRepo: loanRepo,
-		bookSvc:  bookSvc,
-		cb:       resilience.NewBreaker("loan-create"),
-		timeout:  3 * time.Second,
-		retries:  3,
-		delay:    500 * time.Millisecond,
+		loanRepo:   loanRepo,
+		bookClient: bookClient,
+		cb:         resilience.NewBreaker("loan-create"),
+		timeout:    3 * time.Second,
+		retries:    3,
+		delay:      500 * time.Millisecond,
 	}
 
 }
@@ -47,11 +48,13 @@ func (u *LoanUsecase) CreateLoan(ctx context.Context, loan *domain.Loan) error {
 		_, err := u.cb.Execute(func() (interface{}, error) {
 
 			//service - to - service call, book exists?
-			exists, err := u.bookSvc.CheckBookExists(ctx, loan.BookID)
+			exists, err := u.bookClient.CheckBookExists(ctx, &bookpb.CheckBookExistsRequest{
+				Id: loan.BookID,
+			})
 			if err != nil {
 				return nil, err
 			}
-			if !exists {
+			if !exists.Exists {
 				return nil, ErrBookNotFound
 			}
 

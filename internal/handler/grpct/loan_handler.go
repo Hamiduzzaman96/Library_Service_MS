@@ -19,7 +19,7 @@ func NewLoanHandler(u *usecase.LoanUsecase) *LoanHandler {
 	return &LoanHandler{usecase: u}
 }
 
-func (h *LoanHandler) CreateLoan(ctx context.Context, req *loanpb.CreateLoanRequest) (*loanpb.CreateLoanResponse, error) {
+func (h *LoanHandler) CreateLoan(ctx context.Context, req *loanpb.CreateLoanRequest) (*loanpb.Empty, error) {
 	// proto -> domain
 	loan := &domain.Loan{
 		BookID: req.BookId,
@@ -27,6 +27,7 @@ func (h *LoanHandler) CreateLoan(ctx context.Context, req *loanpb.CreateLoanRequ
 	}
 	// call usecase
 	err := h.usecase.CreateLoan(ctx, loan)
+
 	if err != nil {
 		//business error mapping
 		if err == usecase.ErrBookNotFound {
@@ -34,13 +35,7 @@ func (h *LoanHandler) CreateLoan(ctx context.Context, req *loanpb.CreateLoanRequ
 		}
 		return nil, status.Errorf(codes.Internal, "failed to create loan : %v", err)
 	}
-	//domain -> proto
-	return &loanpb.CreateLoanResponse{
-		Id:     loan.ID,
-		BookId: loan.BookID,
-		UserId: loan.UserID,
-		Status: loan.Status,
-	}, nil
+	return &loanpb.Empty{}, err
 }
 
 // Get loan

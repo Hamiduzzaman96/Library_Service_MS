@@ -26,10 +26,10 @@ const (
 // LoanServiceClient is the client API for LoanService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Loan Service (internal, no HTTP mapping)
 type LoanServiceClient interface {
-	// create a new loan
-	CreateLoan(ctx context.Context, in *CreateLoanRequest, opts ...grpc.CallOption) (*CreateLoanResponse, error)
-	// Get loan by ID
+	CreateLoan(ctx context.Context, in *CreateLoanRequest, opts ...grpc.CallOption) (*Empty, error)
 	GetLoan(ctx context.Context, in *GetLoanRequest, opts ...grpc.CallOption) (*GetLoanResponse, error)
 }
 
@@ -41,9 +41,9 @@ func NewLoanServiceClient(cc grpc.ClientConnInterface) LoanServiceClient {
 	return &loanServiceClient{cc}
 }
 
-func (c *loanServiceClient) CreateLoan(ctx context.Context, in *CreateLoanRequest, opts ...grpc.CallOption) (*CreateLoanResponse, error) {
+func (c *loanServiceClient) CreateLoan(ctx context.Context, in *CreateLoanRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateLoanResponse)
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, LoanService_CreateLoan_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -64,10 +64,10 @@ func (c *loanServiceClient) GetLoan(ctx context.Context, in *GetLoanRequest, opt
 // LoanServiceServer is the server API for LoanService service.
 // All implementations must embed UnimplementedLoanServiceServer
 // for forward compatibility.
+//
+// Loan Service (internal, no HTTP mapping)
 type LoanServiceServer interface {
-	// create a new loan
-	CreateLoan(context.Context, *CreateLoanRequest) (*CreateLoanResponse, error)
-	// Get loan by ID
+	CreateLoan(context.Context, *CreateLoanRequest) (*Empty, error)
 	GetLoan(context.Context, *GetLoanRequest) (*GetLoanResponse, error)
 	mustEmbedUnimplementedLoanServiceServer()
 }
@@ -79,7 +79,7 @@ type LoanServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLoanServiceServer struct{}
 
-func (UnimplementedLoanServiceServer) CreateLoan(context.Context, *CreateLoanRequest) (*CreateLoanResponse, error) {
+func (UnimplementedLoanServiceServer) CreateLoan(context.Context, *CreateLoanRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateLoan not implemented")
 }
 func (UnimplementedLoanServiceServer) GetLoan(context.Context, *GetLoanRequest) (*GetLoanResponse, error) {

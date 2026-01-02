@@ -24,6 +24,15 @@ message GetBookResponse {
   string isbn = 4;
 }
 
+// service to service Check
+message CheckBookExistsRequest {
+  int64 id = 1;
+}
+
+message CheckBookExistsResponse {
+  bool exists = 1;
+}
+
 // Empty message (already provided by google.protobuf.Empty)
 import "google/protobuf/empty.proto";
 message Empty {}
@@ -45,4 +54,6 @@ service BookService {
       get: "/v1/books/{id}"
     };
   }
+
+   rpc CheckBookExists(CheckBookExistsRequest) returns (CheckBookExistsResponse);
 }

@@ -7,9 +7,9 @@
 package loanpb
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	_ "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -74,74 +74,6 @@ func (x *CreateLoanRequest) GetUserId() int64 {
 	return 0
 }
 
-type CreateLoanResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	BookId        int64                  `protobuf:"varint,2,opt,name=book_id,json=bookId,proto3" json:"book_id,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateLoanResponse) Reset() {
-	*x = CreateLoanResponse{}
-	mi := &file_loan_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateLoanResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateLoanResponse) ProtoMessage() {}
-
-func (x *CreateLoanResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_loan_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateLoanResponse.ProtoReflect.Descriptor instead.
-func (*CreateLoanResponse) Descriptor() ([]byte, []int) {
-	return file_loan_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateLoanResponse) GetId() int64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *CreateLoanResponse) GetBookId() int64 {
-	if x != nil {
-		return x.BookId
-	}
-	return 0
-}
-
-func (x *CreateLoanResponse) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *CreateLoanResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
 type GetLoanRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -151,7 +83,7 @@ type GetLoanRequest struct {
 
 func (x *GetLoanRequest) Reset() {
 	*x = GetLoanRequest{}
-	mi := &file_loan_proto_msgTypes[2]
+	mi := &file_loan_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -163,7 +95,7 @@ func (x *GetLoanRequest) String() string {
 func (*GetLoanRequest) ProtoMessage() {}
 
 func (x *GetLoanRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_loan_proto_msgTypes[2]
+	mi := &file_loan_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -176,7 +108,7 @@ func (x *GetLoanRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLoanRequest.ProtoReflect.Descriptor instead.
 func (*GetLoanRequest) Descriptor() ([]byte, []int) {
-	return file_loan_proto_rawDescGZIP(), []int{2}
+	return file_loan_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetLoanRequest) GetId() int64 {
@@ -198,7 +130,7 @@ type GetLoanResponse struct {
 
 func (x *GetLoanResponse) Reset() {
 	*x = GetLoanResponse{}
-	mi := &file_loan_proto_msgTypes[3]
+	mi := &file_loan_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -210,7 +142,7 @@ func (x *GetLoanResponse) String() string {
 func (*GetLoanResponse) ProtoMessage() {}
 
 func (x *GetLoanResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_loan_proto_msgTypes[3]
+	mi := &file_loan_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -223,7 +155,7 @@ func (x *GetLoanResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLoanResponse.ProtoReflect.Descriptor instead.
 func (*GetLoanResponse) Descriptor() ([]byte, []int) {
-	return file_loan_proto_rawDescGZIP(), []int{3}
+	return file_loan_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetLoanResponse) GetId() int64 {
@@ -254,31 +186,63 @@ func (x *GetLoanResponse) GetStatus() string {
 	return ""
 }
 
+type Empty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Empty) Reset() {
+	*x = Empty{}
+	mi := &file_loan_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Empty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Empty) ProtoMessage() {}
+
+func (x *Empty) ProtoReflect() protoreflect.Message {
+	mi := &file_loan_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
+	return file_loan_proto_rawDescGZIP(), []int{3}
+}
+
 var File_loan_proto protoreflect.FileDescriptor
 
 const file_loan_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"loan.proto\x12\x06loanpb\x1a\x1cgoogle/api/annotations.proto\"E\n" +
+	"loan.proto\x12\x06loanpb\x1a\x1bgoogle/protobuf/empty.proto\"E\n" +
 	"\x11CreateLoanRequest\x12\x17\n" +
 	"\abook_id\x18\x01 \x01(\x03R\x06bookId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\"n\n" +
-	"\x12CreateLoanResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\abook_id\x18\x02 \x01(\x03R\x06bookId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\" \n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\" \n" +
 	"\x0eGetLoanRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"k\n" +
 	"\x0fGetLoanResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\abook_id\x18\x02 \x01(\x03R\x06bookId\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status2\xbc\x01\n" +
-	"\vLoanService\x12Y\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"\a\n" +
+	"\x05Empty2\x81\x01\n" +
+	"\vLoanService\x126\n" +
 	"\n" +
-	"CreateLoan\x12\x19.loanpb.CreateLoanRequest\x1a\x1a.loanpb.CreateLoanResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/loans\x12R\n" +
-	"\aGetLoan\x12\x16.loanpb.GetLoanRequest\x1a\x17.loanpb.GetLoanResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/v1/loans/{id}B\x0eZ\fproto/loanpbb\x06proto3"
+	"CreateLoan\x12\x19.loanpb.CreateLoanRequest\x1a\r.loanpb.Empty\x12:\n" +
+	"\aGetLoan\x12\x16.loanpb.GetLoanRequest\x1a\x17.loanpb.GetLoanResponseB\x0eZ\fproto/loanpbb\x06proto3"
 
 var (
 	file_loan_proto_rawDescOnce sync.Once
@@ -294,16 +258,16 @@ func file_loan_proto_rawDescGZIP() []byte {
 
 var file_loan_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_loan_proto_goTypes = []any{
-	(*CreateLoanRequest)(nil),  // 0: loanpb.CreateLoanRequest
-	(*CreateLoanResponse)(nil), // 1: loanpb.CreateLoanResponse
-	(*GetLoanRequest)(nil),     // 2: loanpb.GetLoanRequest
-	(*GetLoanResponse)(nil),    // 3: loanpb.GetLoanResponse
+	(*CreateLoanRequest)(nil), // 0: loanpb.CreateLoanRequest
+	(*GetLoanRequest)(nil),    // 1: loanpb.GetLoanRequest
+	(*GetLoanResponse)(nil),   // 2: loanpb.GetLoanResponse
+	(*Empty)(nil),             // 3: loanpb.Empty
 }
 var file_loan_proto_depIdxs = []int32{
 	0, // 0: loanpb.LoanService.CreateLoan:input_type -> loanpb.CreateLoanRequest
-	2, // 1: loanpb.LoanService.GetLoan:input_type -> loanpb.GetLoanRequest
-	1, // 2: loanpb.LoanService.CreateLoan:output_type -> loanpb.CreateLoanResponse
-	3, // 3: loanpb.LoanService.GetLoan:output_type -> loanpb.GetLoanResponse
+	1, // 1: loanpb.LoanService.GetLoan:input_type -> loanpb.GetLoanRequest
+	3, // 2: loanpb.LoanService.CreateLoan:output_type -> loanpb.Empty
+	2, // 3: loanpb.LoanService.GetLoan:output_type -> loanpb.GetLoanResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
