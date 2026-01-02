@@ -11,12 +11,13 @@ import (
 	"github.com/Hamiduzzaman96/Library_Service_MS/internal/usecase"
 	"github.com/Hamiduzzaman96/Library_Service_MS/proto/bookpb"
 	"github.com/Hamiduzzaman96/Library_Service_MS/proto/loanpb"
+	_ "github.com/go-sql-driver/mysql"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:123456@tcp(localhost:3306)/library")
+	db, err := sql.Open("mysql", "root:123456@tcp(localhost:3306)/user_service")
 	if err != nil {
 		log.Fatal(err)
 	}

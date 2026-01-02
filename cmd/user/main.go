@@ -11,13 +11,14 @@ import (
 	"github.com/Hamiduzzaman96/Library_Service_MS/internal/repository/mysql"
 	"github.com/Hamiduzzaman96/Library_Service_MS/internal/usecase"
 	"github.com/Hamiduzzaman96/Library_Service_MS/proto/userpb"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 )
 
 func main() {
 	//connect to MySQL
-	db, err := sql.Open("mysql", "root:123456 @tcp(localhost:3306)/library")
+	db, err := sql.Open("mysql", "root:ramim#rimi96 @tcp(localhost:3306)/library")
 	if err != nil {
 		log.Fatal(err)
 	}

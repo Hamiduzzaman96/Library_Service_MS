@@ -4,23 +4,12 @@ package loanpb;
 
 option go_package = "proto/loanpb";
 
-import "google/api/annotations.proto";
 
 service LoanService {
     //create a new loan
-    rpc CreateLoan(CreateLoanRequest) returns (CreateLoanResponse){
-        option (google.api.http) = {
-            post: "/v1/loans"
-            body: "*"
-        };
-    }
+    rpc CreateLoan(CreateLoanRequest) returns (CreateLoanResponse)
  // Get loan by ID
-    rpc GetLoan(GetLoanRequest) returns (GetLoanResponse){
-        option (google.api.http) = {
-            get: "/v1/loans/{id}"
-        };
-    }
-
+    rpc GetLoan(GetLoanRequest) returns (GetLoanResponse)
 }
 
 message CreateLoanRequest {
